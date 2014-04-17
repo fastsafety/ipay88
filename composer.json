@@ -1,0 +1,25 @@
+{
+    "name": "fastsafety/ipay88",
+    "description": "Ipay88 payment gateway module",
+    "autoload": {
+        "psr-4": {
+            "IPay88\\": "src/Ipay88"
+        }
+    },
+    "require": {
+        "illuminate/config": "4.0.*",
+        "mustache/mustache": "~2.5"
+    },
+    "require-dev": {
+        "monolog/monolog": "1.8.0",
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fikri Marhan",
+            "email": "fikri.marhan@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
