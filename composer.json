@@ -7,7 +7,6 @@
         }
     },
     "require": {
-        "illuminate/config": "4.0.*",
         "mustache/mustache": "~2.5"
     },
     "require-dev": {
