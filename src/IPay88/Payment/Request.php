@@ -66,7 +66,7 @@ class Request
 
 	public function setAuthCode($val)
 	{
-		return $this->authCode = $val
+		return $this->authCode = $val;
 	}
 
 	public function getErrDesc()
