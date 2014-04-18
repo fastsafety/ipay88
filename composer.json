@@ -6,11 +6,7 @@
             "IPay88\\": "src/Ipay88"
         }
     },
-    "require": {
-        "mustache/mustache": "~2.5"
-    },
     "require-dev": {
-        "monolog/monolog": "1.8.0",
         "phpspec/phpspec": "2.0.*@dev"
     },
     "license": "MIT",
