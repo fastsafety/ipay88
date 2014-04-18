@@ -85,7 +85,7 @@ class Request
 			$this->merchantKey,
 			$this->getMerchantCode(),
 			$this->getRefNo(),
-			$this->getAmount(),
+			preg_replace('/[\.\,]/', '', $this->getAmount()), //clear ',' and '.'
 			$this->getCurrency()
 			);
 	}
