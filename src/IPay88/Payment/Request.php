@@ -140,7 +140,7 @@ class Request
 		//simple caching
 		if((!$this->signature) || $refresh)
 		{
-			$this->signature = Signature::generate_signature(
+			$this->signature = Signature::generateSignature(
 				$this->merchantKey,
 				$this->getMerchantCode(),
 				$this->getRefNo(),
