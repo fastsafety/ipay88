@@ -9,26 +9,31 @@ class RequestSpec extends ObjectBehavior
 {
 	function let($die)
 	{
-		$this->beConstructedWith(array(
-			'MerchantCode' => '123code',
-			'PaymentId'=> 2,
-			'RefNo' => '12345',
-			'Amount'=> '1,278.99',
-			'Currency' => 'MYR',
-			'ProdDesc' => 'A test payment',
-			'UserName' => 'John Doe',
-			'UserEmail'=> 'john.doe@yopmail.com',
-			'UserContact' => '0124346785',
-			'Remark'=> 'This is a test payment from John Doe',
-			'Lang'  => 'UTF-8',
-			'RespondURL'  => 'http://merchant.com/payment/respond',
-			'BackendURL'  => 'http://merchant.com/payment/respond/backend'
-			));
+		$this->beConstructedWith('123key');
 	}
 
     function it_is_initializable()
     {
         $this->shouldHaveType('IPay88\Payment\Request');
+    }
+
+    function it_can_be_statically_generated()
+    {
+    	$this->make('123key',array(
+			'merchantCode' => '123code',
+			'paymentId'=> 2,
+			'refNo' => '12345',
+			'amount'=> '1,278.99',
+			'currency' => 'MYR',
+			'prodDesc' => 'A test payment',
+			'userName' => 'John Doe',
+			'userEmail'=> 'john.doe@yopmail.com',
+			'userContact' => '0124346785',
+			'remark'=> 'This is a test payment from John Doe',
+			'lang'  => 'UTF-8',
+			'respondURL'  => 'http://merchant.com/payment/respond',
+			'backendURL'  => 'http://merchant.com/payment/respond/backend'
+			))->shouldHaveType('IPay88\Payment\Request');
     }
 
 
