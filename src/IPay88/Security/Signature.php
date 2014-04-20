@@ -28,7 +28,7 @@ class Signature
     * @access private
     * @param string $source The string to be converted
     */
-    private function _hex2bin($source)
+    private static function _hex2bin($source)
     {
     	$bin = null;
     	for ($i=0; $i < strlen($source); $i=$i+2) { 
