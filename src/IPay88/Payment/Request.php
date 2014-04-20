@@ -72,7 +72,7 @@ class Request
 	}
 
 	private $prodDesc;
-	public function getProdDesc($val)
+	public function getProdDesc()
 	{
 		return $this->prodDesc;
 	}
@@ -82,7 +82,7 @@ class Request
 	}
 
 	private $userName;
-	public function getUserName($val)
+	public function getUserName()
 	{
 		return $this->userName;
 	}
@@ -125,7 +125,7 @@ class Request
 	}
 
 	private $lang;
-	public function getLang($val)
+	public function getLang()
 	{
 		return $this->lang;
 	}
@@ -163,7 +163,7 @@ class Request
 	}
 
 	private $backendUrl;
-	public function getBackendUrl($val)
+	public function getBackendUrl()
 	{
 		return $this->backendUrl;
 	}
