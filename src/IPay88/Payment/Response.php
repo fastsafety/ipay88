@@ -6,99 +6,185 @@ use IPay88\Security\Signature;
 
 class Response
 {
-	private $referrer;
+	private $merchantKey;
+	public function __construct($merchantKey)
+    {
+    	$this->merchantKey = $merchantKey;
+    }
+
+    private $referrer;
+    public function getReferrer()
+    {
+    	return $this->referrer;
+    }
+
+    public function setReferrer($val)
+    {
+    	return $this->referrer = $val;
+    }
+
 	private $merchantCode;
-	private $paymentId;
-	private $currency;
-	private $transId;
-	private $authCode;
-	private $errDesc;
-	private $signature;
-	private $refNo;
-	private $amount;
-	private $remark;
-	private $status;
-
-	public function getReferrer()
-	{
-		return $this->referrer;
-	}
-
 	public function getMerchantCode()
 	{
 		return $this->merchantCode;
 	}
 
+	public function setMerchantCode($val)
+	{
+		return $this->merchantCode = $val;
+	}
+
+	private $paymentId;
 	public function getPaymentId()
 	{
 		return $this->paymentId;
 	}
 
-	public function getCurrency()
+	public function setPaymentId($val)
 	{
-		return $this->currency;
+		return $this->paymentId = $val;
 	}
 
-	public function getTransId()
-	{
-		return $this->transId;
-	}
-
-	public function getAuthCode()
-	{
-		return $this->authCode;
-	}
-
-	public function getErrDesc()
-	{
-		return $this->errDesc;
-	}
-
-	public function getSignature()
-	{
-		return $this->signature;
-	}
-
+	private $refNo;
 	public function getRefNo()
 	{
 		return $this->refNo;
 	}
 
+	public function setRefNo($val)
+	{
+		return $this->refNo = $val;
+	}
+
+	private $amount;
 	public function getAmount()
 	{
 		return $this->amount;
 	}
 
+	public function setAmount($val)
+	{
+		return $this->amount = $val;
+	}
+
+	private $currency;
+	public function getCurrency()
+	{
+		return $this->currency;
+	}
+
+	public function setCurrency($val)
+	{
+		return $this->currency = $val;
+	}
+
+	private $remark;
 	public function getRemark()
 	{
 		return $this->remark;
 	}
 
+	public function setRemark($val)
+	{
+		return $this->remark = $val;
+	}
+
+	private $transId;
+	public function getTransId()
+	{
+		return $this->transId;
+	}
+
+	public function setTransId($val)
+	{
+		return $this->transId = $val;
+	}
+
+	private $authCode;
+	public function getAuthCode()
+	{
+		return $this->authCode;
+	}
+
+	public function setAuthCode($val)
+	{
+		return $this->authCode = $val;
+	}
+
+	private $status;
 	public function getStatus()
 	{
 		return $this->status;
 	}
 
-	public function __call($method, $args)
-    {
-        if ( ! preg_match('/(?P<accessor>set|get)(?P<property>[A-Z][a-zA-Z0-9]*)/', $method, $match) ||
-             ! property_exists(__CLASS__, $match['property'] = lcfirst($match['property']))
-        ) {
-            throw new \BadMethodCallException(sprintf(
-                "'%s' does not exist in '%s'.", $method, get_class(__CLASS__)
-            ));
-        }
+	public function setStatus($val)
+	{
+		return $this->status = $val;
+	}
 
-        switch ($match['accessor']) {
-            case 'get':
-                return $this->{$match['property']};
-            case 'set':
-                if ( ! $args) {
-                    throw new InvalidArgumentException(sprintf("'%s' requires an argument value.", $method));
-                }
-                $this->{$match['property']} = $args[0];
-                return $this;
-        }
-    }
+	private $errDesc;
+	public function getErrDesc()
+	{
+		return $this->errDesc;
+	}
+
+	public function setErrDesc($val)
+	{
+		return $this->errDesc = $val;
+	}
+
+	private $signature;
+	public function getSignature()
+	{
+		return $this->signature;
+	}
+
+	public function setSignature($val)
+	{
+		return $this->signature = $val;
+	}
+
+	public function isValid()
+	{
+		return Signature::generateSignature(
+				$this->merchantKey, 
+				$this->getMerchantCode(), 
+				$this->getRefNo(), 
+				preg_replace('/[\.\,]/', '', $this->getAmount()), 
+				$this->getCurrency()
+			) == $this->getSignature();
+	}
+
+	protected static $fillable_fields = [
+		'referrer','merchantCode','paymentId','refNo','amount',
+		'currency','remark','transId','authCode','status',
+		'errDesc','signature'
+	];
+
+	/**
+	* IPay88 Payment Response factory function
+	*
+	* @access public
+	* @param string $merchantKey The merchant key provided by ipay88
+	* @param hash $fieldValues Set of field value that is to be set as the properties
+	*  Override `$fillable_fields` to determine what value can be set during this factory method
+	* @example
+	*  $response = IPay88\Payment\Response::make($merchantKey, $fieldValues)
+	* 
+	*/
+	public static function make($merchantKey, $fieldValues)
+	{
+		$request = new Request($merchantKey);
+		foreach(self::$fillable_fields as $field)
+		{
+			if(isset($fieldValues[$field]))
+			{
+				$method = 'set'.ucfirst($field);
+				$request->$method($fieldValues[$field]);
+			}
+		}
+
+		return $request;
+	}
 
 }

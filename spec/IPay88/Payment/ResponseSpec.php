@@ -9,7 +9,7 @@ class ResponseSpec extends ObjectBehavior
 {
 	function let($die)
 	{
-		$this->beConstructedWith(); //merchant key
+		$this->beConstructedWith('123key'); //merchant key
 	}
 
     function it_is_initializable()
