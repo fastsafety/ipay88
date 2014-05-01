@@ -174,7 +174,7 @@ class Response
 	*/
 	public static function make($merchantKey, $fieldValues)
 	{
-		$request = new Request($merchantKey);
+		$request = new Response($merchantKey);
 		foreach(self::$fillable_fields as $field)
 		{
 			if(isset($fieldValues[$field]))
