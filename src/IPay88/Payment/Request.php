@@ -244,7 +244,7 @@ class Request
     * @access public
     * @param boolean $multiCurrency Set to true to get payments optinos for multi currency gateway
     */
-    public static function getPaymentOptions($multiCurrency = false)
+    public static function getPaymentOptions($multiCurrency = true)
     {
         $myrOnly = array(
         	2 => array('Credit Card','MYR'),
