@@ -262,7 +262,7 @@ class Request
         	103 => array('AffinOnline','MYR')
         );
 
-        $multiCurrency = array(
+        $nonMyr = array(
         	25=> array('Credit Card','USD'),
         	35=> array('Credit Card','GBP'),
         	36=> array('Credit Card','THB'),
@@ -274,7 +274,7 @@ class Request
         	42=> array('Credit Card','HKD'),
         );
 
-        return $multiCurrency ? $multiCurrency : $myrOnly;
+        return $multiCurrency ? $nonMyr : $myrOnly;
     }
 
     
