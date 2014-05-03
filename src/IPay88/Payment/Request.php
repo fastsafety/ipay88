@@ -112,7 +112,6 @@ class Request
 		return $this->userContact = $val;
 	}
 
-
 	private $remark;
 	public function getRemark()
 	{
@@ -239,6 +238,43 @@ class Request
         curl_close($curl);
 
         return $result;
+    }
+
+    /**
+    * @access public
+    * @param boolean $multiCurrency Set to true to get payments optinos for multi currency gateway
+    */
+    public static function getPaymentOptions($multiCurrency = false)
+    {
+        $myrOnly = array(
+        	2 => array('Credit Card','MYR'),
+        	6 => array('Maybank2U','MYR'),
+        	8 => array('Alliance Online','MYR'),
+        	10=> array('AmOnline','MYR'),
+        	14=> array('RHB Online','MYR'),
+        	15=> array('Hong Leong Online','MYR'),
+        	16=> array('FPX','MYR'),
+        	20=> array('CIMB Click', 'MYR'),
+        	22=> array('Web Cash','MYR'),
+        	48=> array('PayPal','MYR'),
+        	100 => array('Celcom AirCash','MYR'),
+        	102 => array('Bank Rakyat Internet Banking','MYR'),
+        	103 => array('AffinOnline','MYR')
+        );
+
+        $multiCurrency = array(
+        	25=> array('Credit Card','USD'),
+        	35=> array('Credit Card','GBP'),
+        	36=> array('Credit Card','THB'),
+        	37=> array('Credit Card','CAD'),
+        	38=> array('Credit Card','SGD'),
+        	39=> array('Credit Card','AUD'),
+        	40=> array('Credit Card','MYR'),
+        	41=> array('Credit Card','EUR'),
+        	42=> array('Credit Card','HKD'),
+        );
+
+        return $multiCurrency ? $multiCurrency : $myrOnly;
     }
 
     
