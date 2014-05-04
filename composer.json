@@ -3,7 +3,7 @@
     "description": "Ipay88 payment gateway module",
     "autoload": {
         "psr-4": {
-            "IPay88\\": "src/Ipay88"
+            "IPay88\\": "src/IPay88"
         }
     },
     "require-dev": {
