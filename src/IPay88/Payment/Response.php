@@ -148,10 +148,12 @@ class Response
 	{
 		return Signature::generateSignature(
 				$this->merchantKey, 
-				$this->getMerchantCode(), 
+				$this->getMerchantCode(),
+				$this->getPaymentId(),
 				$this->getRefNo(), 
 				preg_replace('/[\.\,]/', '', $this->getAmount()), 
-				$this->getCurrency()
+				$this->getCurrency(),
+				$this->getStatus()
 			) == $this->getSignature();
 	}
 
